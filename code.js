@@ -38,20 +38,23 @@ const IDLE_TIME = 240 * 60 * 1000; // 240分(4時間)
 const lastMessageTime = new Map();
 
 client.on("messageCreate", message =>{
-  if (message.author.bot) return;
   const channelId_kaso = message.channel.id;
   if (message.content.match(/死ね|死んで｜殺/)){ //暴言検知
+    if (message.author.bot) return;
     let dieid = `https://discord.com/channels/1091335874098233344/${message.channel.id}/${message.id}`
     client.users.cache.get('962670040795201557').send(`**[緊急]** __${message.author.username}__が**${message.cleanContent}**と発言しています。\n今すぐ確認してください。\n${dieid}`)
     message.guild.channels.cache.get('1094423574321836064').send(`${message.channel}で${message.author}が\n「**${message.cleanContent}**」\nと発言しました。\n確認してください。\n${dieid}`)
   } if (message.content === "過疎") { //過疎警察
+    if (message.author.bot) return;
     //if (message.auther.id === "962670040795201557") {
     message.delete();
     message.channel.send("<@&1119925558575374427>\n過疎警察だ！話せ！")
   } if (message.channel.id === channelId_intro) { //自己紹介👍付ける
+    if (message.author.bot) return;
   const emoji = '👍';
        message.react(emoji);
     } if (message.content.match(/死にたい|自殺/)) { //自殺願望検知
+      if (message.author.bot) return;
       let deathid = `https://discord.com/channels/1091335874098233344/${message.channel.id}/${message.id}`
       client.users.cache.get('962670040795201557').send(`**[緊急]** __${message.author.username}__が**${message.cleanContent}**と発言しています。\n今すぐ確認してください。\n${deathid}`)
       message.guild.channels.cache.get('1094423574321836064').send(`${message.channel}で${message.author}が\n「**${message.cleanContent}**」\nと発言しました。\n確認してください。\n絶っ対にこの鯖から死者は出すなよ？\n${deathid}`)
@@ -61,6 +64,7 @@ client.on("messageCreate", message =>{
         client.channels.cache.get(process.env.VOICE_CHANNEL_ID).setName(`${channelname2}`)
        client.channels.cache.get("1105754019961507853").setName(`Bump回数 : ${channelname2}`)
      } if (channelId_kaso === "1094427445945442406"){ //過疎検知(4時間)
+       if (message.author.bot) return;
       // 現在の時刻を取得
       const now = Date.now();
       // マップにチャンネルの最終メッセージ時刻があれば取得
@@ -77,13 +81,14 @@ client.on("messageCreate", message =>{
         const embed = message.embeds[0];
         // 埋め込みのタイトル、説明、フィールドの値を結合
         const embedText = [embed.title, embed.description, ...embed.fields.map(field => field.value)].join('\n');
+        console.log(embedText)
         if (embedText.includes('DISBOARD: Discordサーバー掲示板')) {
           // コンソールログに記録
-          client.channels.resolve('1126649244292481116').send(`bump検知したお`)
+          client.channels.resolve('1126649244292481116').send(`[Bump]Bumpを検知しました！`)
           console.log(`[Bump] Bumpされたよ`);
-        } if (embedText.includes('アップしたよ!**')) {
+        } if (embedText.includes('をアップしたよ!')) {
           // コンソールログに記録
-          client.channels.resolve('1126649244292481116').send(`dissoku検知したお`)
+          client.channels.resolve('1126649244292481116').send(`[dis速]dis速を検知しました！`)
           console.log(`[dissoku] dissokuされたよ`);
         }
       }
