@@ -58,12 +58,12 @@ client.on("messageCreate", message =>{
       let deathid = `https://discord.com/channels/1091335874098233344/${message.channel.id}/${message.id}`
       client.users.cache.get('962670040795201557').send(`**[緊急]** __${message.author.username}__が**${message.cleanContent}**と発言しています。\n今すぐ確認してください。\n${deathid}`)
       message.guild.channels.cache.get('1094423574321836064').send(`${message.channel}で${message.author}が\n「**${message.cleanContent}**」\nと発言しました。\n確認してください。\n絶っ対にこの鯖から死者は出すなよ？\n${deathid}`)
-    } if (message.mentions.roles.has(process.env.ROLE_ID)) { //一応Bump検知(もうすぐ移行する)
+    } /*if (message.mentions.roles.has(process.env.ROLE_ID)) { //一応Bump検知(もうすぐ移行する)
         var channelname = client.channels.cache.get(process.env.VOICE_CHANNEL_ID).name;
         var channelname2 = ++channelname;
         client.channels.cache.get(process.env.VOICE_CHANNEL_ID).setName(`${channelname2}`)
        client.channels.cache.get("1105754019961507853").setName(`Bump回数 : ${channelname2}`)
-     } if (channelId_kaso === "1094427445945442406"){ //過疎検知(4時間)
+     }*/ if (channelId_kaso === "1094427445945442406"){ //過疎検知(4時間)
        if (message.author.bot) return;
       // 現在の時刻を取得
       const now = Date.now();
@@ -85,11 +85,17 @@ client.on("messageCreate", message =>{
         if (embedText.includes('DISBOARD: Discordサーバー掲示板')) {
           // コンソールログに記録
           client.channels.resolve('1126649244292481116').send(`[Bump]Bumpを検知しました！`)
-          console.log(`[Bump] Bumpされたよ`);
-        } if (embedText.includes('をアップしたよ!')) {
+          var channelname = client.channels.cache.get(process.env.VOICE_CHANNEL_ID).name;
+          var channelname2 = ++channelname;
+        client.channels.cache.get(process.env.VOICE_CHANNEL_ID).setName(`${channelname2}`)
+       client.channels.cache.get("1105754019961507853").setName(`Bump回数 : ${channelname2}`)
+        } if (embedText.includes('アップを検知しました。')) {
           // コンソールログに記録
           client.channels.resolve('1126649244292481116').send(`[dis速]dis速を検知しました！`)
-          console.log(`[dissoku] dissokuされたよ`);
+          var channelname = client.channels.cache.get(process.env.VOICE_CHANNEL_ID).name;
+          var channelname2 = ++channelname;
+        client.channels.cache.get(process.env.VOICE_CHANNEL_ID).setName(`${channelname2}`)
+       client.channels.cache.get("1105754019961507853").setName(`Bump回数 : ${channelname2}`)
         }
       }
 })
@@ -127,6 +133,92 @@ client.on("messageCreate", message =>{
         member.guild.channels.cache.get(process.env.CHANNEL_ID).send({ embeds: [embedRemove] });
       member.guild.channels.cache.get('1094423574321836064').send(`${member.user.username} / ${member.id} が退店しました。\n即抜けでしたか？→「>>ban ID]」`)
     });
+
+client.on('messageReactionAdd', (reaction, user) => {  
+  const react_message = reaction.message
+  const react_member = react_message.guild.members.resolve(user)
+  console.log(`${reaction.message.guild} で ${user.tag} が ${reaction.emoji.name} をリアクションしました`)
+  if (reaction.message.id === '1138354909859811398') {
+  if (reaction.emoji.name === '🔰') {
+    react_member.roles.add('1103987123251585046')
+  } if (reaction.emoji.name === '⏫') {
+    react_member.roles.add('1100392209544658945')
+  } if (reaction.emoji.name === '🚨') {
+    react_member.roles.add('1119925558575374427')
+  } if (reaction.emoji.name === '📢') {
+    react_member.roles.add('1105465002363727952')
+  }} if (reaction.message.id === '1138355042567585883') {
+  if (reaction.emoji.name === '🇦') {
+    react_member.roles.add('1109058167159136256')
+  } if (reaction.emoji.name === '🇧') {
+    react_member.roles.add('1109057744188739604')
+  } if (reaction.emoji.name === '🇨') {
+    react_member.roles.add('1109057666556375061')
+  } if (reaction.emoji.name === '🇩') {
+    react_member.roles.add('1109058554897371156')
+  } if (reaction.emoji.name === '🇪') {
+    react_member.roles.add('1109059438012289157')
+  } if (reaction.emoji.name === '🇫') {
+    react_member.roles.add('1109059133652606996')
+  } if (reaction.emoji.name === '🇬') {
+    react_member.roles.add('1109058504670597140')
+  } if (reaction.emoji.name === '🇭') {
+    react_member.roles.add('1109061114727251988')
+  } if (reaction.emoji.name === '🇮') {
+    react_member.roles.add('1109061032107835453')
+  } if (reaction.emoji.name === '🇯') {
+    react_member.roles.add('1109060249199058954')
+  } if (reaction.emoji.name === '🇰') {
+    react_member.roles.add('1109057947541184632')
+  } if (reaction.emoji.name === '🇱') {
+    react_member.roles.add('1109328356253651075')
+  } if (reaction.emoji.name === '🇲') {
+    react_member.roles.add('1113798279981961236')
+  }}
+})
+
+client.on('messageReactionRemove', (reaction, user) => {  
+  const react_message_remove = reaction.message
+  const react_member_remove = react_message_remove.guild.members.resolve(user)
+  console.log(`${reaction.message.guild} で ${user.tag} が ${reaction.emoji.name} をリアクションしました`)
+  if (reaction.message.id === '1138354909859811398') {
+  if (reaction.emoji.name === '🔰') {
+    react_member_remove.roles.remove('1103987123251585046')
+  } if (reaction.emoji.name === '⏫') {
+    react_member_remove.roles.remove('1100392209544658945')
+  } if (reaction.emoji.name === '🚨') {
+    react_member_remove.roles.remove('1119925558575374427')
+  } if (reaction.emoji.name === '📢') {
+    react_member_remove.roles.remove('1105465002363727952')
+  }} if (reaction.message.id === '1138355042567585883') {
+  if (reaction.emoji.name === '🇦') {
+    react_member_remove.roles.remove('1109058167159136256')
+  } if (reaction.emoji.name === '🇧') {
+    react_member_remove.roles.remove('1109057744188739604')
+  } if (reaction.emoji.name === '🇨') {
+    react_member_remove.roles.remove('1109057666556375061')
+  } if (reaction.emoji.name === '🇩') {
+    react_member_remove.roles.remove('1109058554897371156')
+  } if (reaction.emoji.name === '🇪') {
+    react_member_remove.roles.remove('1109059438012289157')
+  } if (reaction.emoji.name === '🇫') {
+    react_member_remove.roles.remove('1109059133652606996')
+  } if (reaction.emoji.name === '🇬') {
+    react_member_remove.roles.remove('1109058504670597140')
+  } if (reaction.emoji.name === '🇭') {
+    react_member_remove.roles.remove('1109061114727251988')
+  } if (reaction.emoji.name === '🇮') {
+    react_member_remove.roles.remove('1109061032107835453')
+  } if (reaction.emoji.name === '🇯') {
+    react_member_remove.roles.remove('1109060249199058954')
+  } if (reaction.emoji.name === '🇰') {
+    react_member_remove.roles.remove('1109057947541184632')
+  } if (reaction.emoji.name === '🇱') {
+    react_member_remove.roles.remove('1109328356253651075')
+  } if (reaction.emoji.name === '🇲') {
+    react_member_remove.roles.remove('1113798279981961236')
+  }}
+})
 
 const BUTTON_ID_PREFIX = "role_"
 //ボタンを出す※readyイベントが発生する度にボタンが送信されるので注意
@@ -211,24 +303,24 @@ const embed = new EmbedBuilder()
   .setTitle("必要なロールを選択してください。")
   .addFields(
     {
-      name: "📢お知らせ通知",
-      value: "お知らせを通知します。",
-    },
-    {
-      name: "📢接客Botお知らせ通知",
-      value: "接客Botのお知らせを通知します。",
-      },
-    {
       name: "🔰新規歓迎し隊",
       value: "新規さんが来店したときに通知します。",
+      inline: true
     },
     {
       name: "⏫bumpし隊",
       value: "bumpやディス速をUPできるときに通知します。",
+      inline: true
     },
     {
       name: "🚨過疎対策メンバー",
-      value: "サーバーが過疎なときに通知します。\n\n※「インタラクションに失敗しました」と表示されたときはもう一度ボタンを押してください。\n※__**[連携ロール](https://discord.com/channels/1091335874098233344/1098530365271982133)**__も取得していただけると幸いです。",
+      value: "サーバーが過疎なときに通知します。",
+      inline: true
+    },
+    {
+     name: "📢接客Botお知らせ通知",
+     value: "接客Botのお知らせを通知します。\n\n※__**[連携ロール](https://discord.com/channels/1091335874098233344/1098530365271982133)**__も取得していただけると幸いです。", 
+      inline: true
     },
   )
   .setColor("#33ff00")
@@ -237,7 +329,36 @@ const embed = new EmbedBuilder()
   })
   .setTimestamp();
 
-async function ButtonCreate2(ChannelID2, RoleID2, RoleID3, RoleID4, RoleID5, RoleID6){
+/*client.once("messageCreate", message=> {
+if (message.author.bot) return;
+  if (message.content === 'role_panel')
+    //message.channel.send({embeds: [embed]})
+    message.channel.send({embeds: [gamerole]})
+} )
+
+/*client.on("messageCreate", message=> {
+  message.react('🔰')
+  message.react('⏫')
+  message.react('🚨')
+  message.react('📢')})
+
+client.on("messageCreate", message=> {
+  message.react('🇦')
+  message.react('🇧')
+  message.react('🇨')
+  message.react('🇩')
+  message.react('🇪')
+  message.react('🇫')
+  message.react('🇬')
+  message.react('🇭')
+  message.react('🇮')
+  message.react('🇯')
+  message.react('🇰')
+  message.react('🇱')
+  message.react('🇲')
+} )
+
+/*async function ButtonCreate2(ChannelID2, RoleID2, RoleID3, RoleID4, RoleID5, RoleID6){
   const channel2 = await client.channels.fetch(ChannelID2)
   
 const buttons = new ButtonBuilder()
@@ -280,7 +401,7 @@ const buttons = new ButtonBuilder()
   }
                 
 
-/*client.once("messageCreate", message => {
+client.once("messageCreate", message => {
 	if (message.content === "接客Botさん。ボタンを設置してください。")
 	//ChannelIdとRoleIdには任意の値を入れること。
 	//※ボタンが送信されたらこの部分は削除しても構いません。
@@ -291,56 +412,69 @@ const gamerole = new EmbedBuilder()
   .setTitle("プレイしているゲームを選択してください。")
   .addFields(
     {
-      name: "🌏Minecraft",
-      value: "マインクラフトに関する通知を受け取れます。",
+      name: ":regional_indicator_a:Minecraft",
+      value: " ",
+      inline: true
     },
     {
-      name: "🔫APEX",
-      value: "APEXに関する通知を受け取れます。",
+      name: ":regional_indicator_b:APEX",
+      value: " ",
+      inline: true
     },
     {
-      name: "⚔️原神",
-      value: "原神に関する通知を受け取れます。",
+      name: ":regional_indicator_c:原神",
+      value: " ",
+      inline: true
     },
     {
-      name: "🔫VALORANT",
-      value: "VALORANTに関する通知を受け取れます。",
+      name: ":regional_indicator_d:VALORANT",
+      value: " ",
+      inline: true
     },
     {
-      name: "⚔️MONSTER HUNTER",
-      value: "モンスターハンターに関する通知を受け取れます。",
+      name: ":regional_indicator_e:MONSTER HUNTER",
+      value: " ",
+      inline: true
     },
     {
-      name: "🐉ARK",
-      value: "ARKに関する通知を受け取れます。",
+      name: ":regional_indicator_f:ARK",
+      value: " ",
+      inline: true
     },
     {
-      name: "🪓Rust",
-      value: "Rustに関する通知を受け取れます。",
+      name: ":regional_indicator_g:Rust",
+      value: " ",
+      inline: true
     },
     {
-      name: "⚔️DRAGON QUEST",
-      value: "ドラゴンクエストに関する通知を受け取れます。",
+      name: ":regional_indicator_h:DRAGON QUEST",
+      value: " ",
+      inline: true
     },
     {
-      name: "⚔️FINAL FANTASY",
-      value: "ファイナルファンタジーに関する通知を受け取れます。",
+      name: ":regional_indicator_i:FINAL FANTASY",
+      value: " ",
+      inline: true
     },
     {
-      name: "🧟‍♂️BIOHAZARD",
-      value: "バイオハザードに関する通知を受け取れます。",
+      name: ":regional_indicator_j:BIOHAZARD",
+      value: " ",
+      inline: true
     },
     {
-      name: "🔫Fortnite",
-      value: "フォートナイトに関する通知を受け取れます。",
+      name: ":regional_indicator_k:Fortnite",
+      value: " ",
+      inline: true
     },
     {
-      name: "🌏ROBLOX",
-      value: "Robloxに関する通知を受け取れます。",
+      name: ":regional_indicator_l:ROBLOX",
+      value: " ",
+      inline: true
     },
     {
-      name: "🎵プロセカ",
-      value: "プロセカに関する通知を受け取れます。\n\n※「インタラクションに失敗しました」と表示されたときはもう一度ボタンを押してください。",
+      name: ":regional_indicator_m:プロセカ",
+      value: " ",
+      inline: true
     },
   )
   .setColor("#00ff00")
@@ -349,7 +483,7 @@ const gamerole = new EmbedBuilder()
   })
   .setTimestamp();
 
-async function ButtonCreate3(ChannelId3, RoleId6, RoleId7, RoleId8, RoleId9, RoleId10, RoleId16){
+/*async function ButtonCreate3(ChannelId3, RoleId6, RoleId7, RoleId8, RoleId9, RoleId10, RoleId16){
     const channel3 = await client.channels.fetch(ChannelId3)
     const gamerole1 = new ButtonBuilder()
         .setCustomId(`${BUTTON_ID_PREFIX}${RoleId6}`)
@@ -442,7 +576,7 @@ async function ButtonCreate3(ChannelId3, RoleId6, RoleId7, RoleId8, RoleId9, Rol
     })
 }
 
-/*client.once("messageCreate", message =>　{
+client.once("messageCreate", message =>　{
 if (message.content === "接客Botはゲームロールパネルを設置します。")
 ButtonCreate3("1100391722908909620", "1109058167159136256", "1109057744188739604", "1109057666556375061", "1109058554897371156", "1109059438012289157")
 ButtonCreate4("1100391722908909620", "1109059133652606996", "1109058504670597140", "1109061114727251988", "1109061032107835453", "1109060249199058954")
